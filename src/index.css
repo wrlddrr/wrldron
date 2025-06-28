@@ -1,0 +1,360 @@
+@import "tailwindcss";
+
+  :root {
+            --crt-green: #33ff33;
+            --crt-amber: #ff9900;
+            --crt-blue: #66ccff;
+            --scanline-color: rgba(0, 255, 65, 0.1);
+            --screen-bg: #0a0a0a;
+        }
+        
+        body {
+            background-color: var(--screen-bg);
+            color: #c0c0c0;
+            font-family: 'Share Tech Mono', monospace;
+            overflow-x: hidden;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(20, 40, 0, 0.3) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(40, 0, 40, 0.3) 0%, transparent 20%);
+        }
+        
+        /* Enhanced CRT effects */
+        .crt-effect::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(18, 16, 16, 0) 50%, 
+                rgba(0, 0, 0, 0.25) 50%),
+                linear-gradient(90deg, 
+                rgba(255, 0, 0, 0.06), 
+                rgba(0, 255, 0, 0.02), 
+                rgba(0, 0, 255, 0.06));
+            background-size: 100% 3px, 4px 100%;
+            pointer-events: none;
+            z-index: 100;
+            animation: scanline 8s linear infinite;
+        }
+        
+        @keyframes scanline {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+        
+        .crt-curvature {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 90;
+            box-shadow: 
+                inset 0 0 60px rgba(0, 0, 0, 0.9),
+                inset 0 0 150px rgba(0, 0, 0, 0.5);
+            border-radius: 2% / 1%;
+        }
+        
+        /* Enhanced glitch effect */
+        .glitch {
+            position: relative;
+            color: var(--crt-green);
+            text-shadow: 0 0 2px var(--crt-green), 0 0 5px var(--crt-green);
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        
+        .glitch::before {
+            color: var(--crt-blue);
+            z-index: -1;
+            animation: glitch 3s infinite;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        }
+        
+        .glitch::after {
+            color: var(--crt-amber);
+            z-index: -2;
+            animation: glitch 2s infinite reverse;
+            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+        }
+        
+        @keyframes glitch {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(-2px); }
+            40% { transform: translateX(3px); }
+            60% { transform: translateX(-1px); }
+            80% { transform: translateX(4px); }
+            100% { transform: translateX(0); }
+        }
+        
+        /* Vintage terminal style */
+        .vintage-terminal {
+            background: rgba(5, 5, 5, 0.7);
+            border: 1px solid #333;
+            box-shadow: 
+                inset 0 0 10px rgba(0, 0, 0, 0.5),
+                0 0 15px rgba(0, 255, 65, 0.1);
+            position: relative;
+        }
+        
+        .vintage-terminal::before {
+            content: "";
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Enhanced flicker effect */
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+            20%, 24%, 55% { opacity: 0.7; }
+        }
+        
+        .flicker {
+            animation: flicker 3s infinite;
+            text-shadow: 0 0 5px var(--crt-green);
+        }
+        
+        /* CRT text glow */
+        .crt-glow {
+            text-shadow: 0 0 3px var(--crt-green), 0 0 10px rgba(51, 255, 51, 0.4);
+        }
+        
+        /* Cassette tape project cards */
+        .cassette-tape {
+            background: linear-gradient(135deg, #222 0%, #111 100%);
+            border: 2px solid #444;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .cassette-tape::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            height: 30px;
+            background: linear-gradient(to right, #555 0%, #333 20%, #333 80%, #555 100%);
+            border-radius: 3px;
+        }
+        
+        .cassette-tape::after {
+            content: "";
+            position: absolute;
+            top: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #333 30%, #111 100%);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+        }
+        
+        .cassette-tape:hover {
+            transform: translateY(-5px) rotate(1deg);
+            box-shadow: 0 10px 20px rgba(0, 255, 65, 0.2);
+        }
+        
+        /* Analog gauge skill meters */
+        .analog-gauge {
+            position: relative;
+            height: 20px;
+            background: #111;
+            border: 1px solid #333;
+            overflow: hidden;
+        }
+        
+        .gauge-fill {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, #1a3300, var(--crt-green));
+            animation: fillGauge 2s ease-out forwards;
+        }
+        
+        .gauge-marks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    to right,
+                    rgba(0,0,0,0.3),
+                    rgba(0,0,0,0.3) 1px,
+                    transparent 1px,
+                    transparent 10%
+                );
+        }
+        
+        @keyframes fillGauge {
+            from { width: 0; }
+        }
+        
+        /* Vintage photo effect */
+        .vintage-photo {
+            border: 3px double #444;
+            background: 
+                linear-gradient(rgba(0, 30, 0, 0.3), 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="black"/><circle cx="50" cy="50" r="40" fill="none" stroke="%23333" stroke-width="1"/></svg>'));
+            background-size: cover;
+            box-shadow: 
+                inset 0 0 20px rgba(0,0,0,0.8),
+                0 0 20px rgba(0,0,0,0.6);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .vintage-photo::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at center, transparent 50%, rgba(0,30,0,0.4) 100%),
+                linear-gradient(135deg, rgba(100,80,0,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        /* Floppy disk elements */
+        .floppy-label {
+            background: linear-gradient(135deg, #1a5a1a 0%, #0d3a0d 100%);
+            border: 1px solid #2a7a2a;
+            padding: 8px 12px;
+            display: inline-block;
+            font-size: 0.9rem;
+            position: relative;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+        }
+        
+        .floppy-label::before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #2a7a2a;
+            background: #0a2a0a;
+        }
+        
+        /* VHS tracking effect */
+        .vhs-tracking {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(0deg, rgba(0,0,0,0.8), rgba(0,0,0,0.4));
+            z-index: 110;
+            animation: vhsDistort 10s infinite linear;
+            pointer-events: none;
+        }
+        
+        @keyframes vhsDistort {
+            0% { transform: translateY(0); opacity: 0.7; }
+            10% { transform: translateY(-2px); opacity: 0.8; }
+            20% { transform: translateY(1px); opacity: 0.6; }
+            30% { transform: translateY(-3px); opacity: 0.9; }
+            40% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(2px); opacity: 0.5; }
+            60% { transform: translateY(-1px); opacity: 0.8; }
+            70% { transform: translateY(3px); opacity: 0.6; }
+            80% { transform: translateY(0); opacity: 0.7; }
+            90% { transform: translateY(-2px); opacity: 0.9; }
+            100% { transform: translateY(0); opacity: 0.7; }
+        }
+        
+      
+        .analog-meter {
+            position: relative;
+            width: 100%;
+            height: 100px;
+            margin: 20px auto;
+        }
+        
+        .meter-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            border: 2px solid #333;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .meter-needle {
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            width: 4px;
+            height: 70%;
+            background: var(--crt-green);
+            transform-origin: bottom center;
+            transform: translateX(-50%) rotate(-40deg);
+            z-index: 2;
+            box-shadow: 0 0 5px var(--crt-green);
+            transition: transform 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .meter-scale {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+        
+        .meter-mark {
+            width: 2px;
+            height: 15px;
+            background: #444;
+            margin-top: auto;
+        }
+        
+        .meter-mark:nth-child(5n+1) {
+            height: 25px;
+            background: #666;
+        }
+        
+        /* Pixel grid background */
+        .pixel-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(20, 30, 10, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(20, 30, 10, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: -1;
+            opacity: 0.3;
+        }
